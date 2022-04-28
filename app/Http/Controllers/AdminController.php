@@ -37,5 +37,14 @@ class AdminController extends Controller
         $appoint->status='Canceled';
         $appoint->save();
         return back();
-      }
+    }
+    public function show_doctors(){
+      return view('admin.show_doctors',[
+          'doctors'=>Doctor::all()
+      ]);
+    }
+    public function delete_doctor(Doctor $doctor){
+      $doctor->delete();
+      return back()->with('success','This doctor has been deleted');
+    }
 }

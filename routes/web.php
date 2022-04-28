@@ -28,6 +28,11 @@ Route::get('/appoints/{appoint}/delete',[HomeController::class,'delete_appoint']
 Route::get('/admin_appoints',[AdminController::class,'show_appoints']);
 Route::get('/approveAppoint/{appoint}',[AdminController::class,'approveAppoint']);
 Route::get('/cancelAppoint/{appoint}',[AdminController::class,'cancelAppoint']);
+
+Route::get('/show_doctors',[AdminController::class,'show_doctors'])->middleware('admin');
+Route::get('/delete/{doctor}',[AdminController::class,'delete_doctor'])->middleware('admin');
+Route::get('/update/{doctor}',[AdminController::class,'update_doctor'])->middleware('admin');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
