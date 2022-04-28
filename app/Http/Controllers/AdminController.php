@@ -47,4 +47,21 @@ class AdminController extends Controller
       $doctor->delete();
       return back()->with('success','This doctor has been deleted');
     }
+    public function update_doctor(Doctor $doctor){
+      return view('admin.update_doctor_view',[
+          'doctor'=>$doctor
+      ]);
+    }
+    public function updating_doctor(Request $request,Doctor $doctor){
+       $doctor->name=$request->name;
+       $doctor->phone=$request->phone;
+       $doctor->speciality=$request->speciality;
+       $doctor->room=$request->room;
+       if($request->image){
+           $imageName=request()->file('image')->store('uploadDoctorImage');
+           $doctor->image=$imageName;
+       }
+       $doctor->save();
+       return redirect()->back()->with('success','Successfully Updated Informatino');
+    }
 }

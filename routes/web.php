@@ -32,6 +32,7 @@ Route::get('/cancelAppoint/{appoint}',[AdminController::class,'cancelAppoint']);
 Route::get('/show_doctors',[AdminController::class,'show_doctors'])->middleware('admin');
 Route::get('/delete/{doctor}',[AdminController::class,'delete_doctor'])->middleware('admin');
 Route::get('/update/{doctor}',[AdminController::class,'update_doctor'])->middleware('admin');
+Route::post('/updating_doctor/{doctor}',[AdminController::class,'updating_doctor'])->middleware('admin');
 
 Route::middleware([
     'auth:sanctum',
