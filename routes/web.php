@@ -23,6 +23,7 @@ Route::get('/add_doctor',[AdminController::class,'add_doctor']);
 
 Route::post('/add_doctor',[AdminController::class,'upload_doctor']);
 
+Route::post('/add_appointment',[AdminController::class,'add_appointment']);
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
