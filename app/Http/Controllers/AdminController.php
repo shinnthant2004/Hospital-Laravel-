@@ -39,4 +39,14 @@ class AdminController extends Controller
       Appointment::create($formData);
       return redirect()->back()->with('success','Appointment is completely requested.We will contact you soon');
     }
+    public function my_appointments(){
+        $appointments=Appointment::where('user_id',Auth()->user()->id)->get();
+      return view('user.my_appointment',[
+          'appoints'=>$appointments
+      ]);
+    }
+    public function delete_appoint(Appointment $appoint){
+     $appoint->delete();
+     return redirect()->back();
+    }
 }

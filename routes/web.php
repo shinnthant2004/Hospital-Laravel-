@@ -24,6 +24,8 @@ Route::get('/add_doctor',[AdminController::class,'add_doctor']);
 Route::post('/add_doctor',[AdminController::class,'upload_doctor']);
 
 Route::post('/add_appointment',[AdminController::class,'add_appointment']);
+Route::get('/user/appointment',[AdminController::class,'my_appointments'])->middleware('auth');
+Route::get('/appoints/{appoint}/delete',[AdminController::class,'delete_appoint']);
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
