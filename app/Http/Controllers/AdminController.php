@@ -23,30 +23,19 @@ class AdminController extends Controller
       Doctor::create($formData);
       return redirect()->back()->with('success','New Doctor is added');
     }
-    public function add_appointment(){
-      $formData=request()->validate([
-          'name'=>['required','min:3'],
-          'email'=>['required'],
-          'phone'=>['required'],
-          'doctor'=>['required'],
-          'message'=>['required','min:5'],
-          'date'=>['required']
-      ]);
-      $formData['status']='In progress';
-      if(Auth::user()){
-        $formData['user_id']=Auth::user()->id;
+    public function show_appoints(){
+       return view('admin.show_appoints',[
+           'appoints'=>Appointment::all()
+       ]);
+    }
+    public function approveAppoint(Appointment $appoint){
+      $appoint->status='Approved';
+      $appoint->save();
+      return back();
+    }
+    public function cancelAppoint(Appointment $appoint){
+        $appoint->status='Canceled';
+        $appoint->save();
+        return back();
       }
-      Appointment::create($formData);
-      return redirect()->back()->with('success','Appointment is completely requested.We will contact you soon');
-    }
-    public function my_appointments(){
-        $appointments=Appointment::where('user_id',Auth()->user()->id)->get();
-      return view('user.my_appointment',[
-          'appoints'=>$appointments
-      ]);
-    }
-    public function delete_appoint(Appointment $appoint){
-     $appoint->delete();
-     return redirect()->back();
-    }
 }

@@ -16,16 +16,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',[HomeController::class,'index']);
-
 Route::get('/home',[HomeController::class,'redirect']);
 
 Route::get('/add_doctor',[AdminController::class,'add_doctor']);
-
 Route::post('/add_doctor',[AdminController::class,'upload_doctor']);
 
-Route::post('/add_appointment',[AdminController::class,'add_appointment']);
-Route::get('/user/appointment',[AdminController::class,'my_appointments'])->middleware('auth');
-Route::get('/appoints/{appoint}/delete',[AdminController::class,'delete_appoint']);
+Route::post('/add_appointment',[HomeController::class,'add_appointment']);
+Route::get('/user/appointment',[HomeController::class,'my_appointments'])->middleware('auth');
+Route::get('/appoints/{appoint}/delete',[HomeController::class,'delete_appoint']);
+
+Route::get('/admin_appoints',[AdminController::class,'show_appoints']);
+Route::get('/approveAppoint/{appoint}',[AdminController::class,'approveAppoint']);
+Route::get('/cancelAppoint/{appoint}',[AdminController::class,'cancelAppoint']);
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
