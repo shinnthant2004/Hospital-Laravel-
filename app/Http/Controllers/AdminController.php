@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
 use App\Models\Doctor;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\SendMailNotication;
+use Illuminate\Support\Facades\Notification;
 
 class AdminController extends Controller
 {
@@ -63,5 +65,21 @@ class AdminController extends Controller
        }
        $doctor->save();
        return redirect()->back()->with('success','Successfully Updated Informatino');
+    }
+    public function show_mail(Appointment $appoint){
+        return view('admin.show_mail',[
+            'appoint'=>$appoint
+        ]);
+    }
+    public function send_mail(Request $request,Appointment $appoint){
+        $details=[
+            'greeting'=>$request->greeting,
+            'body'=>$request->body,
+            'actiontext'=>$request->actiontext,
+            'actionurl'=>$request->actionurl,
+            'endpart'=>$request->endpart,
+        ];
+        Notification::send($appoint,new SendMailNotication($details));
+        return back()->with('success','Mail has been sent');
     }
 }

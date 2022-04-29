@@ -25,6 +25,7 @@
                     <th scope="col">Status</th>
                     <th scope="col">Approve</th>
                     <th scope="col">Cancel</th>
+                    <th scope="col">Mail</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -42,6 +43,9 @@
                     </td>
                     <td>
                         <a href="cancelAppoint/{{ $appoint->id }}" class="btn btn-warning">Cancel</a>
+                    </td>
+                    <td>
+                        <a href="admin_mail/{{ $appoint->id }}" class="btn btn-primary">Send</a>
                     </td>
                   </tr>
                   @endforeach

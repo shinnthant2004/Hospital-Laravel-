@@ -34,6 +34,9 @@ Route::get('/delete/{doctor}',[AdminController::class,'delete_doctor'])->middlew
 Route::get('/update/{doctor}',[AdminController::class,'update_doctor'])->middleware('admin');
 Route::post('/updating_doctor/{doctor}',[AdminController::class,'updating_doctor'])->middleware('admin');
 
+Route::get('/admin_mail/{appoint}',[AdminController::class,'show_mail'])->middleware('admin');
+Route::post('/send_mail/{appoint}',[AdminController::class,'send_mail'])->middleware('admin');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
